@@ -4,5 +4,7 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
-
+    <typeAliases>
+        <typeAlias alias="MemberDto" type="com.example.cookinn.model.member.MemberDto"/>
+    </typeAliases>
 </configuration>
