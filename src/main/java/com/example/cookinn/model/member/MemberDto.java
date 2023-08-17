@@ -14,4 +14,7 @@ public class MemberDto extends BaseDto {
     private String tel;
     private String role;
     private String memberStatus;
+    private String lastLoginTime;
+
+    private Long storeId;
 }

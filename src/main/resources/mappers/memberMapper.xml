@@ -13,12 +13,14 @@
         SELECT  *
         FROM    member
         WHERE   username = #{username}
+        AND     member_status = 'Y'
     </select>
 
     <!--전체 직원 조회-->
     <select id="selectMemberList" resultType="MemberDto">
         SELECT  *
         FROM    member
+        AND     member_status = 'Y'
     </select>
 
     <!--개인 직원 조회-->
@@ -26,5 +28,58 @@
         SELECT  *
         FROM    member
         WHERE   member_id = #{memberId}
+        AND     member_status = 'Y'
     </select>
+
+    <!--수정, 삭제 시 필요한 패스워드 조회-->
+    <select id="selectDbPasswordByMemberId" parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT  password
+        FROM    member
+        WHERE   member_id = #{memberId}
+        AND     member_status = 'Y'
+    </select>
+
+    <!--회원 정보 수정, 비밀번호 수정-->
+    <update id="updateMemberByMemberUpdateDto" parameterType="MemberUpdateDto">
+        UPDATE member
+        SET tel = #{tel},
+            updated_time = sysdate()
+        <if test="storeId != null and storeId != ''">
+            store_id = #{storeId}
+        </if>
+        WHERE member_id = #{memberId}
+        AND     member_status = 'Y'
+    </update>
+
+    <!--직원 퇴사 시 memberStatus를 N으로 변경하여 숨김-->
+    <update id="updateMemberStatusByMemberId" parameterType="java.lang.Long">
+        UPDATE  member
+        SET     member_status = 'N',
+                updated_time = sysdate()
+        WHERE   member_id = #{memberId}
+    </update>
+
+    <!--로그인 시 로그인 시간을 업데이트-->
+    <update id="updateMemberLoginTimeByMemberId" parameterType="java.lang.Long">
+        UPDATE  member
+        SET     last_login_time = sysdate()
+        WHERE   member_id = #{memberId}
+    </update>
+
+    <!--퇴사한 직원들 가져오는 로직-->
+   <select id="selectResignMemberList" resultType="MemberDto">
+       <![CDATA[
+        SELECT  *
+        FROM    member
+        WHERE   member_status = 'N'
+        AND     last_login_time <= DATE_SUB(NOW(), INTERVAL 30 SECOND)
+        ]]>
+    </select>
+
+    <!--퇴사 한지 3년 지난 사람들 삭제-->
+   <delete id="deleteMemberByMemberId" parameterType="java.lang.Long">
+        DELETE
+        FROM    member
+        WHERE   member_id = #{memberId}
+    </delete>
 </mapper>

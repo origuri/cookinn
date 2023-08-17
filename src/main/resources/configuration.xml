@@ -6,5 +6,6 @@
     </settings>
     <typeAliases>
         <typeAlias alias="MemberDto" type="com.example.cookinn.model.member.MemberDto"/>
+        <typeAlias alias="MemberUpdateDto" type="com.example.cookinn.model.member.MemberUpdateDto"/>
     </typeAliases>
 </configuration>

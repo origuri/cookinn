@@ -36,6 +36,8 @@ public class PrincipalDetailsService implements UserDetailsService {
         MemberDto member = memberRepository.selectMemberDtoByUsername(username);
         log.info("프린시펀 디테일 서비스 아이디 잘 찾아왓나? -> {}",member);
         if(member != null){
+            // 로그인에 성공하면 로그인 시간을 넣어줌.
+            memberRepository.updateMemberLoginTimeByMemberId(member.getMemberId());
             return new PrincipalDetails(member);
         }else {
             return null;
