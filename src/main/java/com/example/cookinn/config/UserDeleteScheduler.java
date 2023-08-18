@@ -21,7 +21,7 @@ public class UserDeleteScheduler {
     * */
     //
     @Scheduled(cron = "0 0 0 * * *")
-    public void cleanupInactiveUsers() {
+    public void deleteResignUser() {
 
         List<MemberDto> memberDtoList = memberRepository.selectResignMemberList();
         if(!memberDtoList.isEmpty()){
