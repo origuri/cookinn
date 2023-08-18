@@ -1,7 +1,9 @@
 package com.example.cookinn.config;
 
 import com.example.cookinn.model.member.MemberDto;
+import com.example.cookinn.model.store.StoreDto;
 import com.example.cookinn.repository.member.MemberRepository;
+import com.example.cookinn.repository.store.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserDeleteScheduler {
     private final MemberRepository memberRepository;
+    private final StoreRepository storeRepository;
 
     /*
     * 매일 자정에 실행 됨.
@@ -27,6 +30,15 @@ public class UserDeleteScheduler {
         if(!memberDtoList.isEmpty()){
             for(MemberDto memberDto : memberDtoList){
                 memberRepository.deleteMemberByMemberId(memberDto.getMemberId());
+            }
+        }
+    }
+    @Scheduled(cron = "0 0 0 * * *")
+    public void deleteClosedStore(){
+        List<StoreDto> storeDtoList = storeRepository.selectClosedStoreList();
+        if(!storeDtoList.isEmpty()){
+            for(StoreDto storeDto : storeDtoList){
+                storeRepository.deleteClosedStoreByStoreId(storeDto.getStoreId());
             }
         }
     }

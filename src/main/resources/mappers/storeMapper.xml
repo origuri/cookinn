@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="storeMapper">
+    <!--신규 업장 등록-->
+    <insert id="insertStoreByStoreDto" parameterType="StoreDto">
+        INSERT INTO store (store_num, store_name, store_tel, city, street, zipcode, created_time, admin_name)
+        VALUES (#{storeNum}, #{storeName}, #{storeTel}, #{city}, #{street}, #{zipcode}, sysdate(),#{adminName})
+    </insert>
+
+    <!--전체 매장 조회-->
+    <select id="selectStoreList" resultType="StoreDto">
+        SELECT  *
+        FROM    store
+        WHERE   store_status = 'Y'
+    </select>
+
+    <!--매장 이름으로 조회-->
+    <select id="selectStoreListByStoreName" parameterType="java.lang.String" resultType="StoreDto">
+        SELECT  *
+        FROM    store
+        WHERE   store_status = 'Y'
+        AND     store_name LIKE '%'||#{storeName}||'%'
+    </select>
+
+    <!--매장 아이디(pk)로 단건 조회-->
+    <select id="selectStoreByStoreId" parameterType="java.lang.Long" resultType="StoreDto">
+        SELECT  *
+        FROM    store
+        WHERE   store_status = 'Y'
+        AND     store_id = #{storeId}
+    </select>
+
+    <!--매장 정보 수정-->
+    <update id="updateStoreByStoreUpdateDto" parameterType="StoreUpdateDto">
+        UPDATE  store
+        SET     store_name = #{storeName},
+                store_tel = #{storeTel},
+                city = #{city},
+                street = #{street},
+                zipcode = #{zipcode},
+                updated_time = sysdate(),
+                store_status = #{storeStatus}
+        WHERE   store_id = #{storeId}
+    </update>
+
+    <!--폐점된지 1년 된 매장 가져오기-->
+    <select id="selectClosedStoreList" resultType="StoreDto">
+        <![CDATA[
+        SELECT  *
+        FROM    store
+        WHERE   store_status = 'N'
+        AND     updated_time <= DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        ]]>
+    </select>
+
+    <!--폐점된지 1년 된 매장 삭제하기-->
+    <delete id="deleteClosedStoreByStoreId" parameterType="java.lang.Long">
+        DELETE
+        FROM    store
+        WHERE   store_id = #{storeId}
+        AND     store_status = 'N'
+    </delete>
+</mapper>

@@ -26,7 +26,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             result = session.insert("insertMemberByMemberDto", memberDto);
             log.info("레파지토리 insertMemberByMemberDto => {}", result);
         }catch (Exception e){
-            log.info("레파지토리 insertMemberByMemberDto 에러 => {}", e.getMessage());
+            log.error("레파지토리 insertMemberByMemberDto 에러 => {}", e.getMessage());
         }
         return result;
     }
@@ -38,7 +38,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             memberDto = session.selectOne("selectMemberDtoByUsername", username);
             log.info("레파지토리 selectMemberDtoByUsername memberDto -> {}",memberDto);
         }catch (Exception e){
-            log.info("레파지토리 selectMemberDtoByUsername 에러 -> {}",e.getMessage());
+            log.error("레파지토리 selectMemberDtoByUsername 에러 -> {}",e.getMessage());
         }
         return memberDto;
     }
@@ -54,7 +54,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             memberDtoList = session.selectList("selectMemberList");
             log.info("레파지토리 selectMemberList size -> {}",memberDtoList.size());
         }catch (Exception e){
-            log.info("레파지토리 selectMemberList 에러 -> {}",e.getMessage());
+            log.error("레파지토리 selectMemberList 에러 -> {}",e.getMessage());
 
         }
         return memberDtoList;
@@ -70,7 +70,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             memberDto = session.selectOne("selectMemberByMemberId", memberId);
             log.info("레파지토리 selectMemberByMemberId memberDto -> {}",memberDto);
         }catch (Exception e){
-            log.info("레파지토리 selectMemberByMemberId 에러 -> {}", e.getMessage());
+            log.error("레파지토리 selectMemberByMemberId 에러 -> {}", e.getMessage());
         }
         return memberDto;
     }
@@ -86,7 +86,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             dbPassword = session.selectOne("selectDbPasswordByMemberId", memberId);
             log.info("레파지토리 selectDbPasswordByMemberId -> {}", dbPassword);
         }catch (Exception e){
-            log.info("레파지토리 selectDbPasswordByMemberId 에러 -> {}", e.getMessage());
+            log.error("레파지토리 selectDbPasswordByMemberId 에러 -> {}", e.getMessage());
         }
         return dbPassword;
     }
@@ -103,7 +103,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             result = session.update("updateMemberByMemberUpdateDto", memberUpdateDto);
             log.info("레파지토리 updateMemberByMemberUpdateDto result -> {}",result);
         }catch (Exception e){
-            log.info("레파지토리 updateMemberByMemberUpdateDto 에러 -> {}",e.getMessage());
+            log.error("레파지토리 updateMemberByMemberUpdateDto 에러 -> {}",e.getMessage());
         }
         return result;
     }
@@ -122,7 +122,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             result = session.update("updateMemberStatusByMemberId", memberId);
             log.info("레파지토리 updateMemberStatusByMemberId result -> {}", result);
         }catch (Exception e){
-            log.info("레파지토리 updateMemberStatusByMemberId 에러 -> {}", e.getMessage());
+            log.error("레파지토리 updateMemberStatusByMemberId 에러 -> {}", e.getMessage());
         }
         return result;
     }
@@ -138,7 +138,7 @@ public class MemberRepositoryImpl implements MemberRepository {
            result = session.update("updateMemberLoginTimeByMemberId", memberId);
            log.info("레파지토리 updateMemberLoginTimeByMemberId result -> {}",result);
         }catch (Exception e){
-           log.info("레파지토리 updateMemberLoginTimeByMemberId 에러 -> {}",e.getMessage());
+           log.error("레파지토리 updateMemberLoginTimeByMemberId 에러 -> {}",e.getMessage());
 
         }
     }
@@ -153,7 +153,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             memberDtoList = session.selectList("selectResignMemberList");
             log.info("레파지토리 selectResignMemberList size -> {}", memberDtoList.size());
         }catch (Exception e){
-            log.info("레파지토리 selectResignMemberList 에러 -> {}", e.getMessage());
+            log.error("레파지토리 selectResignMemberList 에러 -> {}", e.getMessage());
 
         }
         return memberDtoList;
@@ -169,7 +169,7 @@ public class MemberRepositoryImpl implements MemberRepository {
             result = session.delete("deleteMemberByMemberId", memberId);
             log.info("레파지토리 deleteMemberByMemberId result -> {}",result);
         }catch (Exception e){
-            log.info("레파지토리 deleteMemberByMemberId 에러 -> {}", e.getMessage());
+            log.error("레파지토리 deleteMemberByMemberId 에러 -> {}", e.getMessage());
         }
     }
 }
