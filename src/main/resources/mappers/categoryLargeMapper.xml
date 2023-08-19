@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="categoryLargeMapper">
+    <!--카테고리 대분류 등록-->
+    <insert id="insertCategoryLargeByCategoryLargeDto" parameterType="CategoryLargeDto">
+        INSERT INTO category_large(large, created_time)
+        VALUES (#{large}, sysdate())
+    </insert>
+
+    <!--카테고리 대분류 등록 시 동일 이름 있는지 확인-->
+    <select id="selectCategoryLargeByLargeName" parameterType="java.lang.String" resultType="CategoryLargeDto">
+        SELECT  *
+        FROM    category_large
+        WHERE   large = #{largeToUpperCase}
+    </select>
+
+    <!--카테고리 대분류 다 가져오기-->
+    <select id="selectCategoryLargeList" resultType="CategoryLargeDto">
+        SELECT  *
+        FROM    category_large
+    </select>
+
+    <!--카테고리 대분류 수정하기 -->
+    <update id="updateCategoryLargeByCategoryLargeDto" parameterType="CategoryLargeDto">
+        UPDATE  category_large
+        SET     large = #{large},
+                updated_time = sysdate()
+        WHERE   category_large_id = #{categoryLargeId}
+    </update>
+
+    <!--카테고리 대분류 삭제하기 -->
+    <delete id="deleteCategoryLargeByLargeId" parameterType="java.lang.Long">
+        DELETE
+        FROM    category_large
+        WHERE   category_large_id = #{categoryLargeId}
+    </delete>
+</mapper>

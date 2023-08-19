@@ -45,4 +45,8 @@ public class ItemController {
             return new ResponseEntity<>("이미 등록되어 있는 제품입니다.", HttpStatus.BAD_REQUEST);
         }
     }
+    /*
+    * 아이템 등록이나 검색할 때 searchDto에 바코드하고 이름 해서 onchange이벤트로 검사하는 로직 만들자
+    * itemRepository.selectItemByItemBarcode(itemDto.getItemBarcode()); 이거 조금 수정해서 사용하자.
+    * */
 }

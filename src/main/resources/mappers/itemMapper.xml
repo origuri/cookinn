@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="storeMapper">
+<mapper namespace="itemMapper">
     <!--제품 등록시 바코드로 이미 등록된건지 유무 확인-->
     <select id="selectItemByItemBarcode" parameterType="java.lang.Long" resultType="ItemDto">
         SELECT  *

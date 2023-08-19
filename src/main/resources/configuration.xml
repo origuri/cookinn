@@ -10,5 +10,6 @@
         <typeAlias alias="StoreDto" type="com.example.cookinn.model.store.StoreDto"/>
         <typeAlias alias="StoreUpdateDto" type="com.example.cookinn.model.store.StoreUpdateDto"/>
         <typeAlias alias="ItemDto" type="com.example.cookinn.model.item.ItemDto"/>
+        <typeAlias alias="categoryLargeDto" type="com.example.cookinn.model.category.CategoryLargeDto"/>
     </typeAliases>
 </configuration>

@@ -27,13 +27,7 @@ public class ItemService {
         if(itemDto.getQuantity() >= 1000 || itemDto.getCategoryLargeId() == 0 || itemDto.getCategoryMidId() == 0){
             return 2;
         }
-        // 해당 바코드로 등록된 재료가 있는 지 확인
-        ItemDto savedItemDto = itemRepository.selectItemByItemBarcode(itemDto.getItemBarcode());
-        if(savedItemDto != null){
-            return 3;
-        }else{
-            int result = itemRepository.insertItemByItemDto(itemDto);
-            return result;
-        }
+        int result = itemRepository.insertItemByItemDto(itemDto);
+        return result;
     }
 }
