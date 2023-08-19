@@ -20,7 +20,7 @@
         SELECT  *
         FROM    store
         WHERE   store_status = 'Y'
-        AND     store_name LIKE '%'||#{storeName}||'%'
+        AND     store_name LIKE CONCAT('%',#{storeName},'%')
     </select>
 
     <!--매장 아이디(pk)로 단건 조회-->

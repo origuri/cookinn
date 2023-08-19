@@ -1,10 +1,13 @@
 package com.example.cookinn.repository.item;
 
 import com.example.cookinn.model.item.ItemDto;
+import com.example.cookinn.model.item.ItemSearchDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -12,19 +15,6 @@ import org.springframework.stereotype.Repository;
 public class ItemRepositoryImpl implements ItemRepository{
     private final SqlSession session;
 
-    // item 등록시 시리얼 넘버로 중복확인
-    @Override
-    public ItemDto selectItemByItemBarcode(Long itemBarcode) {
-        ItemDto itemDto = null;
-        try{
-            itemDto = session.selectOne("selectItemByItemBarcode", itemBarcode);
-            log.info("레파지토리 selectItemByItemBarcode itemDto -> {}", itemDto);
-        }catch (Exception e){
-            log.error("레파지토리 selectItemByItemBarcode 에러 -> {}", e.getMessage());
-
-        }
-        return itemDto;
-    }
     /*
      * item 등록하기
      * 파라미터 : itemDto
@@ -44,5 +34,26 @@ public class ItemRepositoryImpl implements ItemRepository{
 
         }
         return result;
+    }
+
+    /*
+     * 아이템 등록 시 또는 이름으로 검색 로직
+     * 파라미터 : barcode, name, productOrigin, company, keep
+     * 특이사항 : user, admin 모두 사용 가능하게 해야함.
+     *           onChange 이벤트 사용
+     *           name으로 할 때는 sql에서 like %이름% 사용
+     * 권한 : user 이상
+     * */
+    @Override
+    public List<ItemDto> selectItemByItemSearchDto(ItemSearchDto itemSearchDto) {
+        List<ItemDto> itemDtoList = null;
+        try{
+            log.info("itemSearchDto -> {}", itemSearchDto);
+            itemDtoList = session.selectList("selectItemByItemSearchDto", itemSearchDto);
+            log.info("레파지토리 selectItemByItemSearchDto 사이즈 -> {}", itemDtoList);
+        }catch (Exception e){
+            log.error("레파지토리 selectItemByItemSearchDto 에러 -> {}",e.getMessage());
+        }
+        return itemDtoList;
     }
 }

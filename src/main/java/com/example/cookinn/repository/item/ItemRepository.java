@@ -1,10 +1,12 @@
 package com.example.cookinn.repository.item;
 
 import com.example.cookinn.model.item.ItemDto;
+import com.example.cookinn.model.item.ItemSearchDto;
+
+import java.util.List;
 
 public interface ItemRepository {
-    // item 등록시 시리얼 넘버로 중복확인
-    ItemDto selectItemByItemBarcode(Long itemBarcode);
+
     /*
      * item 등록하기
      * 파라미터 : itemDto
@@ -14,4 +16,13 @@ public interface ItemRepository {
      * 권한 : admin
      * */
     int insertItemByItemDto(ItemDto itemDto);
+    /*
+     * 아이템 등록 시 또는 이름으로 검색 로직
+     * 파라미터 : barcode, name, productOrigin, company, keep
+     * 특이사항 : user, admin 모두 사용 가능하게 해야함.
+     *           onChange 이벤트 사용
+     *           name으로 할 때는 sql에서 like %이름% 사용
+     * 권한 : user 이상
+     * */
+    List<ItemDto> selectItemByItemSearchDto(ItemSearchDto itemSearchDto);
 }

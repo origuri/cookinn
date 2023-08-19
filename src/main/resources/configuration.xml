@@ -5,11 +5,19 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <typeAliases>
+        <!--member-->
         <typeAlias alias="MemberDto" type="com.example.cookinn.model.member.MemberDto"/>
         <typeAlias alias="MemberUpdateDto" type="com.example.cookinn.model.member.MemberUpdateDto"/>
+
+        <!--store-->
         <typeAlias alias="StoreDto" type="com.example.cookinn.model.store.StoreDto"/>
         <typeAlias alias="StoreUpdateDto" type="com.example.cookinn.model.store.StoreUpdateDto"/>
+
+        <!--item-->
         <typeAlias alias="ItemDto" type="com.example.cookinn.model.item.ItemDto"/>
+        <typeAlias alias="ItemSearchDto" type="com.example.cookinn.model.item.ItemSearchDto"/>
+
+        <!--category-->
         <typeAlias alias="categoryLargeDto" type="com.example.cookinn.model.category.CategoryLargeDto"/>
         <typeAlias alias="CategoryMidDto" type="com.example.cookinn.model.category.CategoryMidDto"/>
     </typeAliases>

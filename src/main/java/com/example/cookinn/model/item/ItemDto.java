@@ -7,7 +7,7 @@ import lombok.Data;
 public class ItemDto extends BaseDto {
 
     private Long itemId;
-    private Long itemBarcode; // 아이템 바코드로 중복 체크
+    private int itemBarcode; // 아이템 바코드로 중복 체크
     private String name;
     private String productOrigin;// 원산지
     private String unit; // g, kg

@@ -3,10 +3,46 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itemMapper">
     <!--제품 등록시 바코드로 이미 등록된건지 유무 확인-->
-    <select id="selectItemByItemBarcode" parameterType="java.lang.Long" resultType="ItemDto">
+    <!--<select id="selectItemByItemSearchDto" parameterType="ItemSearchDto" resultType="ItemDto">
         SELECT  *
         FROM    item
-        WHERE   item_barcode = #{itemBarcode}
+        WHERE   item_status = 'Y'
+        <if test="itemBarcode != null and itemBarcode != 0">
+            AND item_barcode = #{itemBarcode}
+        </if>
+        <if test="name != null and name != ''">
+            AND name LIKE '%'||#{name}||'%'
+        </if>
+        <if test="productOrigin != null and productOrigin != ''">
+            AND product_origin LIKE '%'||#{productOrigin}||'%'
+        </if>
+        <if test="company != null and company != ''">
+            AND company LIKE '%'||#{company}||'%'
+        </if>
+        <if test="keep != null and keep != ''">
+            AND keep LIKE '%'||#{keep}||'%'
+        </if>
+    </select>-->
+
+    <select id="selectItemByItemSearchDto" parameterType="ItemSearchDto" resultType="ItemDto">
+        SELECT  *
+        FROM    item
+        WHERE   item_status = 'Y'
+        <if test="itemBarcode != null and itemBarcode != 0">
+            AND item_barcode = #{itemBarcode}
+        </if>
+        <if test="name != null and name != '' ">
+            AND name like  CONCAT('%',#{name},'%')
+        </if>
+        <if test="productOrigin != null and productOrigin != ''">
+            AND product_origin LIKE CONCAT('%',#{productOrigin},'%')
+        </if>
+        <if test="company != null">
+            AND company LIKE CONCAT('%',#{company},'%')
+        </if>
+        <if test="keep != null and keep != ''">
+            AND keep LIKE CONCAT('%',#{keep},'%')
+        </if>
     </select>
 
     <!--제품 등록-->

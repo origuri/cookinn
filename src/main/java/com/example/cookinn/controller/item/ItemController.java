@@ -3,16 +3,16 @@ package com.example.cookinn.controller.item;
 import com.example.cookinn.model.httpResponse.HttpResponseDto;
 import com.example.cookinn.model.httpResponse.HttpResponseInfo;
 import com.example.cookinn.model.item.ItemDto;
+import com.example.cookinn.model.item.ItemSearchDto;
 import com.example.cookinn.repository.item.ItemRepository;
 import com.example.cookinn.service.item.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -49,4 +49,21 @@ public class ItemController {
     * 아이템 등록이나 검색할 때 searchDto에 바코드하고 이름 해서 onchange이벤트로 검사하는 로직 만들자
     * itemRepository.selectItemByItemBarcode(itemDto.getItemBarcode()); 이거 조금 수정해서 사용하자.
     * */
+    /*
+    * 아이템 등록 시 또는 이름으로 검색 로직
+    * 파라미터 : barcode, name, productOrigin, company, keep
+    * 특이사항 : user, admin 모두 사용 가능하게 해야함.
+    *           onChange 이벤트 사용
+    *           name으로 할 때는 sql에서 like %이름% 사용
+    * 권한 : user 이상
+    * */
+    @GetMapping("/items/search")
+    public ResponseEntity<?> itemListByItemSearchDto(@RequestBody ItemSearchDto itemSearchDto){
+        List<ItemDto> itemDtoList = itemService.findItemListByItemSearchDto(itemSearchDto);
+        if(!itemDtoList.isEmpty()){
+            return new ResponseEntity<>(itemDtoList, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.NOT_FOUND.getStatusCode(), HttpResponseInfo.NOT_FOUND.getMessage()), HttpStatus.NOT_FOUND);
+        }
+    }
 }
