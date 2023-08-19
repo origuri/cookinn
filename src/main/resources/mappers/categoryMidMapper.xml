@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="categoryMidMapper">
+    <!--mysql문법 insert into select-->
+    <insert id="insertCategoryMidByCategoryMidDto" parameterType="CategoryMidDto">
+        INSERT INTO category_mid (category_large_id, category_mid_id, mid, created_time)
+        SELECT
+            #{categoryLargeId},
+            COALESCE(MAX(category_mid_id) + 1, #{categoryLargeId} * 100),
+            #{mid},
+            sysdate()
+        FROM category_mid
+        WHERE category_large_id = #{categoryLargeId}
+    </insert>
+
+    <!--중분류 등록시 이름 중복 확인 -->
+    <select id="selectCategoryMidByMidName" parameterType="java.lang.String" resultType="CategoryMidDto">
+        SELECT  *
+        FROM    category_mid
+        WHERE   mid = #{midName}
+    </select>
+
+    <!--대분류 아이디로 중분류 다가져오기-->
+    <select id="selectCategoryMidListByLargeId" parameterType="java.lang.Long" resultType="CategoryMidDto">
+        SELECT  *
+        FROM    category_mid
+        WHERE   category_large_id = #{largeId}
+        ORDER BY mid
+    </select>
+</mapper>

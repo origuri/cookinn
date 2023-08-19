@@ -47,7 +47,7 @@ public class CategoryLargeController {
             // 없어야 만들어도 되는거니까 200 보냄.
             return new ResponseEntity<>(categoryLargeDto, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.BAD_REQUEST.getStatusCode(), HttpResponseInfo.BAD_REQUEST.getMessage()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.NOT_FOUND.getStatusCode(), HttpResponseInfo.NOT_FOUND.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
 
