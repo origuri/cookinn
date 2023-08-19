@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
@@ -64,6 +65,40 @@ public class CategoryMidRepositoryImpl implements CategoryMidRepository{
             log.error("레파지토리 selectCategoryMidListByLargeId 에러 -> {}",e.getMessage());
         }
         return categoryMidDtoList;
+    }
+
+    /*
+     * 중분류 수정 -> midname만 수정 가능.
+     * 파라미터 : categoryMidDto
+     * 권한 : admin
+     * */
+    @Override
+    public int updateCategoryMidByCategoryMidDto(CategoryMidDto categoryMidDto) {
+       int result = 0;
+       try{
+           result = session.update("updateCategoryMidByCategoryMidDto", categoryMidDto);
+           log.info("레파지토리 updateCategoryMidByCategoryMidDto result -> {}", result);
+       }catch (Exception e){
+           log.error("레파지토리 updateCategoryMidByCategoryMidDto 에러 -> {}", e.getMessage());
+       }
+       return result;
+    }
+
+    /*
+     * 카테고리 중분류 삭제
+     * 파라미터 : largeId, midId
+     * 권한 : admin
+     * */
+    @Override
+    public int deleteCategoryMidByIds(Map<String, Long> ids) {
+        int result = 0;
+        try{
+            result = session.delete("deleteCategoryMidByIds", ids);
+            log.info("레파지토리 deleteCategoryMidByIds result -> {}",result);
+        }catch (Exception e){
+            log.error("레파지토리 deleteCategoryMidByIds 에러 -> {}",e.getMessage());
+        }
+        return result;
     }
 
 

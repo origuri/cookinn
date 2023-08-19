@@ -3,6 +3,7 @@ package com.example.cookinn.repository.category;
 import com.example.cookinn.model.category.CategoryMidDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CategoryMidRepository {
     /*
@@ -26,4 +27,18 @@ public interface CategoryMidRepository {
      * 권한 : user 이상
      * */
     List<CategoryMidDto> selectCategoryMidListByLargeId(Long largeId);
+
+    /*
+     * 중분류 수정 -> midname만 수정 가능.
+     * 파라미터 : categoryMidDto
+     * 권한 : admin
+     * */
+    int updateCategoryMidByCategoryMidDto(CategoryMidDto categoryMidDto);
+
+    /*
+     * 카테고리 중분류 삭제
+     * 파라미터 : largeId, midId
+     * 권한 : admin
+     * */
+    int deleteCategoryMidByIds(Map<String, Long> ids);
 }

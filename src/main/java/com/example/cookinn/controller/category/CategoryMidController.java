@@ -67,4 +67,44 @@ public class CategoryMidController {
             return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.NOT_FOUND.getStatusCode(), HttpResponseInfo.NOT_FOUND.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
+
+    /*
+    * 중분류 수정 -> midname만 수정 가능.
+    * 파라미터 : categoryMidDto
+    * 권한 : admin
+    * */
+    @PutMapping("/category/large/{largeId}/mid/{midId}")
+    public ResponseEntity<?> categoryMidModifyByCategoryMidDto(@PathVariable("largeId") Long largeId,
+                                                               @PathVariable("midId") Long midId,
+                                                               @RequestBody CategoryMidDto categoryMidDto){
+        log.info("largeId, midId -> {}, {}", largeId, midId);
+        categoryMidDto.setCategoryMidId(midId);
+        categoryMidDto.setCategoryLargeId(largeId);
+        int result = categoryMidService.modifyCategoryMidByCategoryMidDto(categoryMidDto);
+        if(result == 1){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.OK.getStatusCode(), HttpResponseInfo.OK.getMessage()), HttpStatus.OK);
+        }else if(result == 2){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.BAD_REQUEST.getStatusCode(), HttpResponseInfo.BAD_REQUEST.getMessage()), HttpStatus.BAD_REQUEST);
+        }else{
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.NOT_FOUND.getStatusCode(), HttpResponseInfo.NOT_FOUND.getMessage()), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /*
+    * 카테고리 중분류 삭제
+    * 파라미터 : largeId, midId
+    * 권한 : admin
+    * */
+    @DeleteMapping("/category/large/{largeId}/mid/{midId}")
+    public ResponseEntity<?> categoryMidRemoveBylargeIdAndMidId(@PathVariable("largeId") Long largeId,
+                                                               @PathVariable("midId") Long midId){
+        int result = categoryMidService.removeCategoryMidBylargeIdAndMidId(largeId,midId);
+        if(result == 1){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.OK.getStatusCode(), HttpResponseInfo.OK.getMessage()), HttpStatus.OK);
+        }else if(result == 2){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.BAD_REQUEST.getStatusCode(), HttpResponseInfo.BAD_REQUEST.getMessage()), HttpStatus.BAD_REQUEST);
+        }else{
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.NOT_FOUND.getStatusCode(), HttpResponseInfo.NOT_FOUND.getMessage()), HttpStatus.NOT_FOUND);
+        }
+    }
 }

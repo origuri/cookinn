@@ -28,4 +28,21 @@
         WHERE   category_large_id = #{largeId}
         ORDER BY mid
     </select>
+
+    <!--중분류 수정-->
+    <update id="updateCategoryMidByCategoryMidDto" parameterType="CategoryMidDto">
+        UPDATE  category_mid
+        SET     mid = #{mid},
+                updated_time = sysdate()
+        WHERE   category_large_id = #{categoryLargeId}
+        AND     category_mid_id = #{categoryMidId}
+    </update>
+
+    <!--중분류 삭제 -->
+    <delete id="deleteCategoryMidByIds" parameterType="java.util.Map">
+        DELETE
+        FROM    category_mid
+        WHERE   category_large_id = #{largeId}
+        AND     category_mid_id = #{midId}
+    </delete>
 </mapper>
