@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="storeMapper">
+    <!--제품 등록시 바코드로 이미 등록된건지 유무 확인-->
+    <select id="selectItemByItemBarcode" parameterType="java.lang.Long" resultType="ItemDto">
+        SELECT  *
+        FROM    item
+        WHERE   item_barcode = #{itemBarcode}
+    </select>
+
+    <!--제품 등록-->
+    <insert id="insertItemByItemDto" parameterType="ItemDto">
+        INSERT INTO item(category_mid_id, category_large_id, item_barcode, name, product_origin, unit, price, quantity, company, notice, keep, created_time)
+        VALUES (#{categoryMidId}, #{categoryLargeId}, #{itemBarcode}, #{name}, #{productOrigin}, #{unit}, #{price}, #{quantity}, #{company},#{notice}, #{keep}, sysdate())
+    </insert>
+    
+</mapper>
