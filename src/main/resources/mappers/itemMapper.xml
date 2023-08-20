@@ -43,6 +43,15 @@
         <if test="keep != null and keep != ''">
             AND keep LIKE CONCAT('%',#{keep},'%')
         </if>
+        ORDER BY
+        <choose>
+            <when test="kind == 0">
+                 price  ASC
+            </when>
+            <otherwise>
+                price   DESC
+            </otherwise>
+        </choose>
     </select>
 
     <!--제품 등록-->

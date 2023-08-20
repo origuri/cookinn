@@ -11,4 +11,5 @@ public class ItemSearchDto {
     private String productOrigin;// 원산지
     private String company; // 제조사
     private String keep; // 보관방법
+    private int kind; // order by 용 1은 올림차순, 2는 내림차순
 }

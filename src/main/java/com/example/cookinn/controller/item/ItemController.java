@@ -46,10 +46,6 @@ public class ItemController {
         }
     }
     /*
-    * 아이템 등록이나 검색할 때 searchDto에 바코드하고 이름 해서 onchange이벤트로 검사하는 로직 만들자
-    * itemRepository.selectItemByItemBarcode(itemDto.getItemBarcode()); 이거 조금 수정해서 사용하자.
-    * */
-    /*
     * 아이템 등록 시 또는 이름으로 검색 로직
     * 파라미터 : barcode, name, productOrigin, company, keep
     * 특이사항 : user, admin 모두 사용 가능하게 해야함.
@@ -66,4 +62,7 @@ public class ItemController {
             return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.NOT_FOUND.getStatusCode(), HttpResponseInfo.NOT_FOUND.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
+    /*
+    *
+    * */
 }
