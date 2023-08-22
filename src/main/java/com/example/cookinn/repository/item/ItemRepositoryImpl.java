@@ -20,7 +20,7 @@ public class ItemRepositoryImpl implements ItemRepository{
      * 파라미터 : itemDto
      * 특이사항 : itemId는 특정 제품의 시리얼넘버(또는 바코드넘버)를 사용함,
      *           즉, 자동으로 올라가는 pk가 아닌 입력하는 방식.
-     *           이미 등록되어 있는 지 확인, 최대 등록 수량 확인.
+     *           이미 등록되어 있는 지 확인, 최대 등록 수량 확인 용으로 사용할 예정
      * 권한 : admin
      * */
     @Override
