@@ -56,4 +56,9 @@ public class ItemRepositoryImpl implements ItemRepository{
         }
         return itemDtoList;
     }
+    /*
+    * aop를 공부해서 적용해보기
+    * 아이템 수정, 삭제 로직 작성해야 함.
+    * 면접 준비 하느라 프로젝트 진도가 막힘. 까먹지 말것.
+    * */
 }
