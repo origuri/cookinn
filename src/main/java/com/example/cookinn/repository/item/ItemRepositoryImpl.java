@@ -2,6 +2,7 @@ package com.example.cookinn.repository.item;
 
 import com.example.cookinn.model.item.ItemDto;
 import com.example.cookinn.model.item.ItemSearchDto;
+import com.example.cookinn.model.item.ItemUpdateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
@@ -57,8 +58,21 @@ public class ItemRepositoryImpl implements ItemRepository{
         return itemDtoList;
     }
     /*
-    * aop를 공부해서 적용해보기
-    * 아이템 수정, 삭제 로직 작성해야 함.
-    * 면접 준비 하느라 프로젝트 진도가 막힘. 까먹지 말것.
-    * */
+     * 아이템 수정 로직
+     * 파라미터 : name, productOrigin, unit, price, quantity, notice, keep, itemStatus, updatedTime
+     * 권한 : admin
+     * */
+    @Override
+    public int updateItemByItemDto(ItemUpdateDto itemUpdateDto) {
+        int result = 0;
+        try {
+            result = session.update("updateItemByItemDto", itemUpdateDto);
+            log.info("레파지토리 updateItemByItemDto result -> {}",result);
+        }catch (Exception e){
+            log.error("레파지토리 updateItemByItemDto 에러 -> {}",e.getMessage());
+
+        }
+        return result;
+    }
+
 }

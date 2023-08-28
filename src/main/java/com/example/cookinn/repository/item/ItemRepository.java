@@ -2,6 +2,7 @@ package com.example.cookinn.repository.item;
 
 import com.example.cookinn.model.item.ItemDto;
 import com.example.cookinn.model.item.ItemSearchDto;
+import com.example.cookinn.model.item.ItemUpdateDto;
 
 import java.util.List;
 
@@ -25,4 +26,11 @@ public interface ItemRepository {
      * 권한 : user 이상
      * */
     List<ItemDto> selectItemByItemSearchDto(ItemSearchDto itemSearchDto);
+
+    /*
+     * 아이템 수정 로직
+     * 파라미터 : name, productOrigin, unit, price, quantity, notice, keep, itemStatus, updatedTime
+     * 권한 : admin
+     * */
+    int updateItemByItemDto(ItemUpdateDto itemUpdateDto);
 }

@@ -34,6 +34,8 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 
     implementation 'ch.qos.logback:logback-classic:1.2.6'
+    implementation 'org.hibernate.validator:hibernate-validator:6.2.0.Final' // valid
+    implementation 'org.aspectj:aspectjweaver:1.9.7' // aop
 }
 
 test {

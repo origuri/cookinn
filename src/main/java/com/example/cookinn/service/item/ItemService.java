@@ -3,6 +3,7 @@ package com.example.cookinn.service.item;
 
 import com.example.cookinn.model.item.ItemDto;
 import com.example.cookinn.model.item.ItemSearchDto;
+import com.example.cookinn.model.item.ItemUpdateDto;
 import com.example.cookinn.repository.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -63,5 +64,16 @@ public class ItemService {
 
         List<ItemDto> itemDtoList = itemRepository.selectItemByItemSearchDto(itemSearchDto);
         return itemDtoList;
+    }
+
+    /*
+     * 아이템 수정 로직
+     * 파라미터 : name, productOrigin, unit, price, quantity, notice, keep, itemStatus, updatedTime
+     * 권한 : admin
+     * */
+    public int modifyItemByItemUpdateDto(ItemUpdateDto itemUpdateDto) {
+
+        return itemRepository.updateItemByItemDto(itemUpdateDto);
+
     }
 }

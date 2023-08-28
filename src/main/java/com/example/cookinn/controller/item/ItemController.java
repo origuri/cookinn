@@ -4,6 +4,7 @@ import com.example.cookinn.model.httpResponse.HttpResponseDto;
 import com.example.cookinn.model.httpResponse.HttpResponseInfo;
 import com.example.cookinn.model.item.ItemDto;
 import com.example.cookinn.model.item.ItemSearchDto;
+import com.example.cookinn.model.item.ItemUpdateDto;
 import com.example.cookinn.repository.item.ItemRepository;
 import com.example.cookinn.service.item.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -63,6 +65,22 @@ public class ItemController {
         }
     }
     /*
-    *
+    * 아이템 수정 로직
+    * 파라미터 : name, productOrigin, unit, price, quantity, notice, keep, itemStatus, updatedTime
+    * 권한 : admin
     * */
+    @PutMapping("/item/{itemId}")
+    public ResponseEntity<?> itemModifyByItemUpdateDto(@PathVariable("itemId") Long itemId,
+                                                       @RequestBody @Valid ItemUpdateDto itemUpdateDto){
+        itemUpdateDto.setItemId(itemId);
+        int result = itemService.modifyItemByItemUpdateDto(itemUpdateDto);
+        if(result == 1){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.OK.getStatusCode(), HttpResponseInfo.OK.getMessage()), HttpStatus.CREATED);
+        }else if(result == 2){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.BAD_REQUEST.getStatusCode(), HttpResponseInfo.BAD_REQUEST.getMessage()), HttpStatus.BAD_REQUEST);
+        }else{
+            return new ResponseEntity<>("수정 실패", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

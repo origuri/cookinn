@@ -16,6 +16,7 @@
         <!--item-->
         <typeAlias alias="ItemDto" type="com.example.cookinn.model.item.ItemDto"/>
         <typeAlias alias="ItemSearchDto" type="com.example.cookinn.model.item.ItemSearchDto"/>
+        <typeAlias alias="ItemUpdateDto" type="com.example.cookinn.model.item.ItemUpdateDto"/>
 
         <!--category-->
         <typeAlias alias="categoryLargeDto" type="com.example.cookinn.model.category.CategoryLargeDto"/>

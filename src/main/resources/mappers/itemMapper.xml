@@ -39,5 +39,19 @@
         INSERT INTO item(category_mid_id, category_large_id, item_barcode, name, product_origin, unit, price, quantity, company, notice, keep, created_time)
         VALUES (#{categoryMidId}, #{categoryLargeId}, #{itemBarcode}, #{name}, #{productOrigin}, #{unit}, #{price}, #{quantity}, #{company},#{notice}, #{keep}, sysdate())
     </insert>
-    
+
+    <!--제품 수정-->
+    <update id="updateItemByItemDto" parameterType="ItemUpdateDto">
+        UPDATE  item
+        SET     category_mid_id = #{categoryMidId},
+                category_large_id = #{categoryLargeId},
+                name = #{name},
+                product_origin = #{productOrigin},
+                unit = #{unit},
+                company = #{company},
+                keep = #{keep},
+                price = #{price},
+                item_status = #{itemStatus}
+        WHERE   item_id = #{itemId}
+    </update>
 </mapper>
