@@ -41,4 +41,11 @@ public interface ItemRepository {
      * 권한 user 이상
      * */
     ItemDto selectItemDetailByItemId(Long itemId);
+
+    /*
+     * 제품 삭제
+     * 파라미터 : itemId
+     * 권한 admin
+     * */
+    int deleteItemByItemId(Long itemId);
 }

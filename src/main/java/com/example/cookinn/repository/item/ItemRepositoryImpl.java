@@ -88,10 +88,27 @@ public class ItemRepositoryImpl implements ItemRepository{
             itemDto = session.selectOne("selectItemDetailByItemId", itemId);
             log.info("레파지토리 selectItemDetailByItemId itemDto -> {}",itemDto);
         }catch (Exception e){
-            log.info("레파지토리 selectItemDetailByItemId 에러 -> {}",e.getMessage());
+            log.error("레파지토리 selectItemDetailByItemId 에러 -> {}",e.getMessage());
 
         }
         return itemDto;
+    }
+
+    /*
+     * 제품 삭제
+     * 파라미터 : itemId
+     * 권한 admin
+     * */
+    @Override
+    public int deleteItemByItemId(Long itemId) {
+        int result = 0;
+        try{
+            result = session.delete("deleteItemByItemId", itemId);
+            log.info("레파지토리 deleteItemByItemId result -> {}", result );
+        }catch (Exception e){
+            log.error("레파지토리 deleteItemByItemId 에러 -> {}", e.getMessage() );
+        }
+        return result;
     }
 
 }

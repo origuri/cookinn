@@ -62,4 +62,11 @@
         FROM    item
         WHERE   item_id = #{itemId}
     </select>
+
+    <!--제품 삭제-->
+    <delete id="deleteItemByItemId" parameterType="java.lang.Long">
+        DELETE
+        FROM    item
+        WHERE   item_id = #{itemId}
+    </delete>
 </mapper>

@@ -101,4 +101,19 @@ public class ItemController {
         }
     }
 
+    /*
+    * 제품 삭제
+    * 파라미터 : itemId
+    * 권한 admin
+    * */
+    @DeleteMapping("/item/{itemId}")
+    public ResponseEntity<?> itemRemoveByItemId(@PathVariable("itemId") Long itemId){
+        int result = itemRepository.deleteItemByItemId(itemId);
+        if(result == 1){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.OK.getStatusCode(), HttpResponseInfo.OK.getMessage()), HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.BAD_REQUEST.getStatusCode(), HttpResponseInfo.BAD_REQUEST.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
