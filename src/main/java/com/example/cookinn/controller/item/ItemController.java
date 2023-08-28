@@ -64,6 +64,24 @@ public class ItemController {
             return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.NOT_FOUND.getStatusCode(), HttpResponseInfo.NOT_FOUND.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
+
+    /*
+    * 하나의 제품을 가져오는 상세정보
+    * 수정할 때 필요함.
+    * 파라미터 : itemId
+    * 권한 user 이상
+    * */
+    @GetMapping("/items/{itemId}")
+    public ResponseEntity<?> itemDetailByItemId(@PathVariable("itemId") Long itemId){
+        ItemDto itemDto = itemRepository.selectItemDetailByItemId(itemId);
+        if(itemDto == null){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.NOT_FOUND.getStatusCode(), HttpResponseInfo.NOT_FOUND.getMessage()), HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<>(itemDto, HttpStatus.OK);
+        }
+    }
+
+
     /*
     * 아이템 수정 로직
     * 파라미터 : name, productOrigin, unit, price, quantity, notice, keep, itemStatus, updatedTime

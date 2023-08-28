@@ -75,4 +75,23 @@ public class ItemRepositoryImpl implements ItemRepository{
         return result;
     }
 
+    /*
+     * 하나의 제품을 가져오는 상세정보
+     * 수정할 때 필요함.
+     * 파라미터 : itemId
+     * 권한 user 이상
+     * */
+    @Override
+    public ItemDto selectItemDetailByItemId(Long itemId) {
+        ItemDto itemDto = null;
+        try{
+            itemDto = session.selectOne("selectItemDetailByItemId", itemId);
+            log.info("레파지토리 selectItemDetailByItemId itemDto -> {}",itemDto);
+        }catch (Exception e){
+            log.info("레파지토리 selectItemDetailByItemId 에러 -> {}",e.getMessage());
+
+        }
+        return itemDto;
+    }
+
 }

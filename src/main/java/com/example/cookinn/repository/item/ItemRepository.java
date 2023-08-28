@@ -33,4 +33,12 @@ public interface ItemRepository {
      * 권한 : admin
      * */
     int updateItemByItemDto(ItemUpdateDto itemUpdateDto);
+
+    /*
+     * 하나의 제품을 가져오는 상세정보
+     * 수정할 때 필요함.
+     * 파라미터 : itemId
+     * 권한 user 이상
+     * */
+    ItemDto selectItemDetailByItemId(Long itemId);
 }
