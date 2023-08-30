@@ -21,5 +21,9 @@
         <!--category-->
         <typeAlias alias="categoryLargeDto" type="com.example.cookinn.model.category.CategoryLargeDto"/>
         <typeAlias alias="CategoryMidDto" type="com.example.cookinn.model.category.CategoryMidDto"/>
+
+        <!--cart-->
+        <typeAlias alias="CartInsertDto" type="com.example.cookinn.model.cart.CartInsertDto"/>
+        <typeAlias alias="CartDto" type="com.example.cookinn.model.cart.CartDto"/>
     </typeAliases>
 </configuration>

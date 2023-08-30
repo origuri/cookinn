@@ -1,4 +1,23 @@
 package com.example.cookinn.repository.cart;
 
+import com.example.cookinn.model.cart.CartDto;
+import com.example.cookinn.model.cart.CartInsertDto;
+
+import java.util.List;
+
 public interface CartRepository {
+
+    /*
+     * 장바구니 목록 가져오기
+     * 파라미터 : x
+     * 권한 : user
+     * */
+    List<CartDto> selectCartListByMemberId(Long memberId);
+
+    /*
+     * 장바구니에 아이템 집어 넣기
+     * 파라미터 : memberId, itemId, count, price
+     * 권한 : user 이상
+     * */
+    int insertCartByCartInsertDto(CartInsertDto cartInsertDto);
 }
