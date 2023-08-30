@@ -2,12 +2,14 @@ package com.example.cookinn.repository.cart;
 
 import com.example.cookinn.model.cart.CartDto;
 import com.example.cookinn.model.cart.CartInsertDto;
+import com.example.cookinn.model.cart.CartUpdateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
@@ -23,6 +25,7 @@ public class CartRepositoryImpl implements CartRepository{
      * */
     @Override
     public List<CartDto> selectCartListByMemberId(Long memberId) {
+        log.info("memberId -> {}", memberId);
         List<CartDto> cartDtoList = null;
         try{
             cartDtoList = session.selectList("selectCartListByMemberId", memberId);
@@ -41,6 +44,7 @@ public class CartRepositoryImpl implements CartRepository{
      * */
     @Override
     public int insertCartByCartInsertDto(CartInsertDto cartInsertDto) {
+        log.info("cartInsertDto -> {}", cartInsertDto);
         int result = 0;
         try{
             result = session.insert("insertCartByCartInsertDto", cartInsertDto);
@@ -48,6 +52,37 @@ public class CartRepositoryImpl implements CartRepository{
         }catch (Exception e){
             log.error("레파지토리 insertCartByCartInsertDto 에러 -> {}", e.getMessage());
 
+        }
+        return result;
+    }
+
+    // 장바구니에 이미 등록된 것인지 확인.
+    @Override
+    public CartInsertDto selectSavedCartByMemberIdAndItemId(Map<String, Long> ids) {
+        CartInsertDto cartInsertDto = null;
+        try{
+            cartInsertDto = session.selectOne("selectSavedCartByMemberIdAndItemId", ids);
+            log.info("레파지토리 selectSavedCartByMemberIdAndItemId cartInsertDto -> {}", cartInsertDto);
+        }catch (Exception e){
+            log.error("레파지토리 selectSavedCartByMemberIdAndItemId 에러 -> {}", e.getMessage());
+
+        }
+        return cartInsertDto;
+    }
+
+    /*
+     * 장바구니 수정
+     * 파라미터 : count, memberId, itemId, cartId
+     * 권한 : user
+     * */
+    @Override
+    public int updateCartByCartId(CartUpdateDto cartUpdateDto) {
+        int result = 0;
+        try{
+            result = session.update("updateCartByCartId", cartUpdateDto);
+            log.info("레파지토리 updateCartByCartId result -> {}", result);
+        }catch (Exception e){
+            log.error("레파지토리 updateCartByCartId 에러 -> {}", e.getMessage());
         }
         return result;
     }

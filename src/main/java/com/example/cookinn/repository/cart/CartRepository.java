@@ -2,8 +2,10 @@ package com.example.cookinn.repository.cart;
 
 import com.example.cookinn.model.cart.CartDto;
 import com.example.cookinn.model.cart.CartInsertDto;
+import com.example.cookinn.model.cart.CartUpdateDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CartRepository {
 
@@ -20,4 +22,15 @@ public interface CartRepository {
      * 권한 : user 이상
      * */
     int insertCartByCartInsertDto(CartInsertDto cartInsertDto);
+
+    // 장바구니에 이미 등록된 것인지 확인
+    CartInsertDto selectSavedCartByMemberIdAndItemId(Map<String, Long> ids);
+
+    /*
+     * 장바구니 수정
+     * 파라미터 : count, memberId, itemId, cartId
+     * 권한 : user
+     * */
+    int updateCartByCartId(CartUpdateDto cartUpdateDto);
+
 }
