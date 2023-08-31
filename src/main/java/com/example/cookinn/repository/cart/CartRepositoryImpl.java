@@ -1,5 +1,6 @@
 package com.example.cookinn.repository.cart;
 
+import com.example.cookinn.model.cart.CartDeleteDto;
 import com.example.cookinn.model.cart.CartDto;
 import com.example.cookinn.model.cart.CartInsertDto;
 import com.example.cookinn.model.cart.CartUpdateDto;
@@ -83,6 +84,23 @@ public class CartRepositoryImpl implements CartRepository{
             log.info("레파지토리 updateCartByCartId result -> {}", result);
         }catch (Exception e){
             log.error("레파지토리 updateCartByCartId 에러 -> {}", e.getMessage());
+        }
+        return result;
+    }
+
+    /*
+     * 장바구니 아이템 삭제
+     * 파라미터 : cartId, memberId, itemId
+     * 권한 : user
+     * */
+    @Override
+    public int  deleteCartByCartDeleteDto(CartDeleteDto cartDeleteDto) {
+        int result = 0;
+        try{
+            result = session.delete("deleteCartByIds", cartDeleteDto);
+            log.info("레파지토리 deleteCartByIds result -> {}", result);
+        }catch (Exception e){
+            log.error("레파지토리 deleteCartByIds 에러 -> {}", e.getMessage());
         }
         return result;
     }

@@ -1,5 +1,6 @@
 package com.example.cookinn.repository.cart;
 
+import com.example.cookinn.model.cart.CartDeleteDto;
 import com.example.cookinn.model.cart.CartDto;
 import com.example.cookinn.model.cart.CartInsertDto;
 import com.example.cookinn.model.cart.CartUpdateDto;
@@ -33,4 +34,10 @@ public interface CartRepository {
      * */
     int updateCartByCartId(CartUpdateDto cartUpdateDto);
 
+    /*
+     * 장바구니 아이템 삭제
+     * 파라미터 : cartId, memberId, itemId
+     * 권한 : user
+     * */
+    int deleteCartByCartDeleteDto(CartDeleteDto cartDeleteDto);
 }

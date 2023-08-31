@@ -33,4 +33,13 @@
         AND     member_id = #{memberId}
         AND     item_id = #{itemId}
     </update>
+
+    <!--장바구니 삭제-->
+    <delete id="deleteCartByIds" parameterType="CartDeleteDto">
+        DELETE
+        FROM    cart
+        WHERE   cart_id = #{cartId}
+        AND     member_id = #{memberId}
+        AND     item_id = #{itemId}
+    </delete>
 </mapper>

@@ -26,5 +26,6 @@
         <typeAlias alias="CartInsertDto" type="com.example.cookinn.model.cart.CartInsertDto"/>
         <typeAlias alias="CartDto" type="com.example.cookinn.model.cart.CartDto"/>
         <typeAlias alias="CartUpdateDto" type="com.example.cookinn.model.cart.CartUpdateDto"/>
+        <typeAlias alias="CartDeleteDto" type="com.example.cookinn.model.cart.CartDeleteDto"/>
     </typeAliases>
 </configuration>

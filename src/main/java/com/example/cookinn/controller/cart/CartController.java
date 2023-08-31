@@ -1,6 +1,7 @@
 package com.example.cookinn.controller.cart;
 
 import com.example.cookinn.auth.PrincipalDetails;
+import com.example.cookinn.model.cart.CartDeleteDto;
 import com.example.cookinn.model.cart.CartDto;
 import com.example.cookinn.model.cart.CartInsertDto;
 import com.example.cookinn.model.cart.CartUpdateDto;
@@ -15,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -88,7 +91,26 @@ public class CartController {
     }
     /*
     * 장바구니 아이템 삭제
-    * 파라미터
+    * 파라미터 : cartId, memberId, itemId
+    * 권한 : user
     * */
+    @DeleteMapping("/cart/{cartId}")
+    public ResponseEntity<?> cartRemoveByCartId(@PathVariable("cartId") Long cartId,
+                                                /*@AuthenticationPrincipal PrincipalDetails principalDetails ,*/
+                                                @RequestBody CartDeleteDto cartDeleteDto){
+        //Long memberId = principalDetails.getMemberId();
+        Long memberId = 1L;
+        cartDeleteDto.setMemberId(memberId);
+        cartDeleteDto.setCartId(cartId);
+
+        int result = cartRepository.deleteCartByCartDeleteDto(cartDeleteDto);
+
+        if(result == 1){
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.OK.getStatusCode(), HttpResponseInfo.OK.getMessage()), HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(new HttpResponseDto<>(HttpResponseInfo.BAD_REQUEST.getStatusCode(), HttpResponseInfo.BAD_REQUEST.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
 }
