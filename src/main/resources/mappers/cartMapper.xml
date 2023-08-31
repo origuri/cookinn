@@ -34,7 +34,7 @@
         AND     item_id = #{itemId}
     </update>
 
-    <!--장바구니 삭제-->
+    <!--장바구니 삭제 로직-->
     <delete id="deleteCartByIds" parameterType="CartDeleteDto">
         DELETE
         FROM    cart
